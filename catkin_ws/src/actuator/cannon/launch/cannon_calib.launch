@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <include file="$(find usb_cam)/launch/usb_cam.launch"> 
+        <arg name="camera_name" value="usb_cam" />
+        <arg name="visualize" value="false" />
+    </include>
+
+    <rosparam command="load" file="$(find user_params)/params/cannon_config.yaml" />
+    
+    <node pkg="cannon" name="cannon" type="cannon_node.py" output="screen" />
+
+    <node pkg="cannon" name="cannon_calib" type="cannon_calib_node.py" output="screen" />
+    
+</launch>

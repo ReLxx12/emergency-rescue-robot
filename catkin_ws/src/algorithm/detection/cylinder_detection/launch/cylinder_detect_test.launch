@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<launch>
+    
+    <arg name="show_process" default="false" />
+    <arg name="tune" default="True" />
+    <arg name="enable" default="True" />
+    
+    <arg name="chip_type" default="$(env CHIP_TYPE)" />
+    <arg name="cam_type" default="ascamera" />
+    <arg name="open_camera" default="true" />
+    <arg name="yolo_visualize" default="true" />
+
+    <rosparam command="load" file="$(find yolov5_rknn)/params/yolov5_rc_$(arg chip_type)_$(arg cam_type).yaml" />
+    
+    <group if="$(arg open_camera)"> 
+        <include file="$(find ascamera)/launch/hp60c.launch" />
+    </group>
+    
+    <group ns="cylinder_det">
+    
+        <param name="show_process" value="$(arg show_process)" />
+        <param name="tune" value="$(arg tune)" />
+        <param name="enable" value="$(arg enable)" />
+        
+        <node pkg="cylinder_detection" name="cylinder_detection" type="cylinder_det_node.py" output="screen" />
+    </group>
+
+</launch>

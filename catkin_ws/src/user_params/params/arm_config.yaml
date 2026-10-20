@@ -1,0 +1,40 @@
+arm_left:
+    rotation:     [0, 90, 90]  # car_2_arm
+    translation:  [0.0, 0.075, 0.305] 
+
+    turn_front: 90
+    turn_middle: 0
+    turn_back: -90
+    
+    claw_tight: 30
+    claw_loose: 60
+
+    delta_servo_1: 0
+    delta_servo_2: 0
+    delta_servo_3: 0
+    delta_servo_4: 0
+    delta_servo_5: 0
+    delta_servo_6: 0
+
+    arm_degree_init: [0, 0, 90, 90, 0]
+
+
+arm_right:
+    rotation:     [0, 90, -90]  # car_2_arm
+    translation:  [0.0, -0.075, 0.305]
+
+    turn_front: -90
+    turn_middle: 0
+    turn_back: 90
+    
+    claw_tight: 30
+    claw_loose: 60
+
+    delta_servo_1: 0
+    delta_servo_2: 0
+    delta_servo_3: 0
+    delta_servo_4: 0
+    delta_servo_5: 0
+    delta_servo_6: 0
+
+    arm_degree_init: [0, 0, 90, 90, 0]

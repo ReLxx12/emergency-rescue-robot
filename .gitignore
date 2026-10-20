@@ -1,0 +1,38 @@
+# ROS catkin build products
+**/build/
+**/devel/
+**/install/
+**/logs/
+
+# Python generated files
+**/__pycache__/
+*.py[cod]
+
+# Robot data and model artifacts
+*.bag
+*.db3
+*.pt
+*.pth
+*.onnx
+*.rknn
+*.rkllm
+
+# SDK and compiled binaries
+*.so
+*.a
+*.dll
+*.exe
+
+# Archives and local data
+*.zip
+*.7z
+*.tar
+*.gz
+*.csv
+*.jsonl
+
+# IDE and editor state
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

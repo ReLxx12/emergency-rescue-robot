@@ -1,0 +1,40 @@
+mission_magage:
+    go_to_grab:  # 前往救援的途经点
+        wp_num: 3
+        #     [x,     y,     yaw, id, exit_l, exit_a, cnt]  [m, m, °, id, m, °, cnt]
+        wp_1: [0.550, 2.650, 180, 21, 0.1,    5,      1]
+        wp_2: [0.450, 1.750, 180, 21, 0.1,    5,      1]
+        wp_3: [1.120, 1.750, 180, 23, 0.1,    5,      1]
+
+    transit_pt:  # 中转点  避免碰撞
+        wp_1: [1.820, 1.750,   0, 10, 0.05,   5,      2]
+        
+    grab:  # 救援点
+        wp_num: 2
+        #     [x,     y,     yaw, id, exit_l, exit_a, cnt]  [m, m, °, id, m, °, cnt]
+        wp_1: [2.064, 2.349, 0,   11, 0.015,   2,      10]
+        wp_2: [2.064, 3.065, 0,  13, 0.015,   2,      10]
+
+    put:  # 安全点
+        wp_num: 2
+        #     [x,     y,     yaw, id, exit_l, exit_a, cnt]  [m, m, °, id, m, °, cnt]
+        wp_1: [2.04, 1.245, 0.0, 9,  0.015,  2,      2]
+        wp_2: [2.04, 0.530, 0.0, 7,  0.015,  2,      2]
+
+    go_back:  # 返回点
+        wp_1: [1.450, 1.750, 0,   23, 0.1,    5,      1]
+
+    park:  # 泊车点
+        wp_num: 1
+        #     [x,     y,     yaw, id, exit_l, exit_a, cnt]  [m, m, °, id, m, °, cnt]
+        wp_1: [0.340, 0.367, 180, 26, 0.015,  2,      2]
+
+grab_param:
+    x_j5_2_claw: 0.085   # m
+    z_j5_2_claw: 0.0115  # m
+
+    sight_middle_h:         300         # pix
+    sight_middle_w:         [269, 457]  # pix
+    x_obj_to_cam_close:     0.24  # m
+    x_obj_to_cam_middle:    0.24  # m
+    x_obj_to_cam_far:       0.24  # m
