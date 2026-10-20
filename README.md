@@ -1,27 +1,38 @@
-# Emergency Rescue Robot Core
+# 紧急救援机器人核心代码
 
-Private-ready source snapshot for the emergency rescue robot ROS 1 project.
+基于 ROS 1 的紧急救援机器人核心源码，包含任务管理、航点导航、视觉定位与检测、底盘和机械臂控制，以及端侧大模型接入。
 
-## What is included
+## 代码结构
 
-- `catkin_ws/src/actuator`: chassis, arm, gimbal, and cannon ROS packages, URDFs, and robot description assets.
-- `catkin_ws/src/user_msgs` and `catkin_ws/src/user_params`: custom ROS messages and hardware parameters.
-- `catkin_ws/src/algorithm/detection`: AprilTag localization, cylinder detection, and the YOLOv5 RKNN integration source.
-- `catkin_ws/src/algorithm/llm/deepseek`: the ROS integration source for the on-device language model.
-- `mission_ws/src/mission`: mission management, waypoint PID navigation, and tag-based localization.
+| 路径 | 主要功能 |
+| --- | --- |
+| `catkin_ws/src/actuator` | 底盘、机械臂、云台和炮台控制，URDF 模型及机器人描述资源 |
+| `catkin_ws/src/user_msgs` | 自定义 ROS 消息 |
+| `catkin_ws/src/user_params` | 设备配置与控制参数 |
+| `catkin_ws/src/algorithm/detection` | AprilTag 定位、圆柱目标检测和 YOLOv5 RKNN 推理接入 |
+| `catkin_ws/src/algorithm/llm/deepseek` | 端侧 DeepSeek 大模型的 ROS 接入节点 |
+| `mission_ws/src/mission` | 救援任务管理、航点 PID 导航和基于标签的定位 |
 
-## Build and runtime dependencies
+## 构建与运行依赖
 
-This is a source-only snapshot of a ROS 1 catkin project. Install the ROS distribution and ROS packages declared by the package manifests, then build `catkin_ws` before building `mission_ws` as an overlay. The exact ROS distribution and board setup should be confirmed against the target robot before deployment.
+本仓库保留 ROS 1 catkin 工程的源码。请先安装目标设备所需的 ROS 发行版及各包 `package.xml` 中声明的依赖，再构建 `catkin_ws`；随后加载该工作区环境，将 `mission_ws` 作为上层工作区构建。具体 ROS 版本和开发板环境需与实际机器人配置核对。
 
-The YOLO/RKNN/RGA and DeepSeek/RKLLM packages require their vendor SDK headers and runtime libraries to be installed separately. The arm inverse-kinematics package also references a compiled kinematics library that is not included. Sensor and navigation drivers not listed above are external workspace dependencies.
+以下依赖需要单独准备：
 
-## Device-specific configuration
+- YOLO/RKNN/RGA 和 DeepSeek/RKLLM 所需的厂商 SDK 头文件及运行库。
+- 机械臂逆运动学包引用的已编译运动学库。
+- 本仓库未收录的传感器驱动、导航组件和其他外部 ROS 包。
 
-Some scripts and YAML files contain absolute paths under `/home/orangepi/` and `/home/jetson/`, plus robot-specific camera, arm, waypoint, and map parameters. Replace or provision those paths and verify all parameters on the target robot before running any motion-control node. Mission recovery code can issue a reverse-velocity command; operate only with the robot secured and a clear test area.
+当前仓库已完成源码整理，尚未验证 ROS 构建及实机运行。
 
-## Repository scope
+## 设备配置
 
-Generated catkin outputs, Python bytecode, SDK binaries and headers, model weights, datasets, archives, executables, maps, competition documents, and the LLaMA-Factory training data are intentionally excluded. Third-party ROS packages should be installed or managed separately with their own licenses and notices.
+部分脚本和 YAML 配置使用 `/home/orangepi/`、`/home/jetson/` 下的绝对路径，并包含针对具体机器人的相机标定、机械臂、航点和地图参数。部署时需按实际环境调整路径，并在启动运动控制节点前核对参数。
 
-No project-wide license is declared in this snapshot. Confirm ownership and license compatibility for each package before changing this repository to public visibility.
+任务脱困逻辑会发出后退速度指令。调试时应固定好机器人或确保周围测试区域空旷，并准备急停措施。
+
+## 收录范围
+
+本仓库包含核心源码、ROS 消息、启动文件、必要配置和机器人描述资源。构建产物、Python 缓存、厂商 SDK 二进制及头文件、模型权重、数据集、压缩包、可执行文件、独立地图文件、比赛资料和 LLaMA-Factory 训练数据均未收录。
+
+第三方 ROS 包需单独安装或管理，并保留其各自的许可证及声明。本仓库暂未声明统一开源许可证；若后续改为公开仓库，需先确认各包代码的权属和许可证兼容性。
